@@ -65,7 +65,7 @@ details p{margin:8px 0 0;color:var(--mut);font-size:14px;line-height:1.7}
  <div class="top"><div class="logo" aria-label="Silkroad Origin Mobile"></div><span class="stt" id="st"></span><button class="cartbtn" onclick="tog(1)" aria-label="السلة">🛒<span class="badge" id="cnt">0</span></button></div>
  <nav><a href="#home">الرئيسية</a><a href="#packs">الحزم</a><a href="#dia">الدايموند</a><a href="#silk">السيلك والجولد</a><a href="#svc">الخدمات</a><a href="#how">إزاي تطلب</a></nav>
 </header>
-<div class="offer">🔥 خصم 5% تلقائي على أي طلب 1500ج أو أكتر — ولو معاك كود خصم اكتبه في السلة</div>
+<div class="offer">🔥 خصم 5% تلقائي على أي طلب 3000ج أو أكتر — ولو معاك كود خصم اكتبه في السلة</div>
 <div class="hero" id="home">
  <h1>متجر Silkroad Origin Mobile</h1>
  <p>تسوّق الحزم والسيلك والخدمات الآن!</p>
@@ -79,7 +79,7 @@ details p{margin:8px 0 0;color:var(--mut);font-size:14px;line-height:1.7}
 <section id="how"><h2>إزاي تطلب؟</h2>
 <div class="steps"><div class="stp"><b>1</b><span>اختار المنتجات وأضفها للسلة</span></div><div class="stp"><b>2</b><span>حوّل المبلغ على رقم الكاش 01007107020</span></div><div class="stp"><b>3</b><span>اكتب اسم شخصيتك وابعت الطلب على واتساب مع صورة التحويل</span></div></div>
 <details><summary>إزاي أحجز خدمة التريد أو التاكسي؟</summary><p>من قسم الخدمات اختار التاريخ والوقت (ص/م) وأضفها للسلة، وبعدها ابعت الطلب على واتساب.</p></details>
-<details><summary>فيه خصم؟</summary><p>أيوه، خصم 5% تلقائي على أي طلب 1500ج أو أكتر. ولو معاك كود خصم اكتبه في السلة. الأكبر بين الخصمين هو اللي بيتطبق.</p></details>
+<details><summary>فيه خصم؟</summary><p>أيوه، خصم 5% تلقائي على أي طلب 3000ج أو أكتر. ولو معاك كود خصم اكتبه في السلة. الأكبر بين الخصمين هو اللي بيتطبق.</p></details>
 <details><summary>ينفع أشحن صندوق الاستثمار مجاناً؟</summary><p>أيوه، بشرط إنك تاخد السيلك.</p></details>
 <details><summary>أكلم مين لو عندي سؤال؟</summary><p>كلمنا على واتساب من الزرار الأخضر في الصفحة.</p></details>
 </section>
@@ -149,7 +149,7 @@ function chg(k,d){const c=C.find(v=>v.k===k);c.q+=d;if(c.q<1)C=C.filter(v=>v.k!=
 function total(){return C.reduce((s,c)=>s+c.p*c.q,0)}
 function draw(){
  $('cnt').textContent=C.reduce((s,c)=>s+c.q,0);
- const D=calc();$('sub').textContent=D.s+' ج';$('tot').textContent=D.t+' ج';$('dr').style.display=D.d?'flex':'none';$('dl').textContent='خصم '+D.pct+'% ('+D.by+')';$('dv').textContent='− '+D.d+' ج';$('hint').textContent=(D.s>0&&D.pct<5&&D.s<1500)?'ضيف '+(1500-D.s)+' ج كمان وخد خصم 5% تلقائي 🎁':'';
+ const D=calc();$('sub').textContent=D.s+' ج';$('tot').textContent=D.t+' ج';$('dr').style.display=D.d?'flex':'none';$('dl').textContent='خصم '+D.pct+'% ('+D.by+')';$('dv').textContent='− '+D.d+' ج';$('hint').textContent=(D.s>0&&D.pct<5&&D.s<3000)?'ضيف '+(3000-D.s)+' ج كمان وخد خصم 5% تلقائي 🎁':'';
  $('items').innerHTML=C.length?C.map(c=>`<div class="it"><div>${c.n}${c.when?`<small>📅 ${c.when}</small>`:''}<small>${c.p*c.q} ج</small></div><button class="q" onclick="chg('${c.k}',-1)">−</button><b>${c.q}</b><button class="q" onclick="chg('${c.k}',1)">+</button></div>`).join(''):'<p style="color:var(--mut);text-align:center">السلة فاضية</p>';
  upd()}
 function upd(){
@@ -161,7 +161,7 @@ function chk(){
  if(!$('nm').value.trim()){toast('اكتب اسم شخصيتك الأول');$('nm').focus();return false}
  if(!$('ok').checked){toast('أكّد تحويل المبلغ الأول');return false}
  return true}
-function calc(){const s=total(),a=s>=1500?5:0,c=(CODE&&CODES[CODE])?CODES[CODE]:0,pct=Math.max(a,c),d=Math.round(s*pct/100);return{s,pct,d,t:s-d,by:c>a?'كود '+CODE:'تلقائي'}}
+function calc(){const s=total(),a=s>=3000?5:0,c=(CODE&&CODES[CODE])?CODES[CODE]:0,pct=Math.max(a,c),d=Math.round(s*pct/100);return{s,pct,d,t:s-d,by:c>a?'كود '+CODE:'تلقائي'}}
 function applyCode(){const v=$('cd').value.trim().toUpperCase(),m=$('cm');if(!v){CODE='';m.textContent=''}else if(CODES[v]){CODE=v;m.style.color='#6fe08f';m.textContent='✓ تم تطبيق الكود: '+(NAMES[v]||v)}else{CODE='';m.style.color='#ff8a80';m.textContent='الكود غير صحيح'}draw()}
 function calcP(q){return Math.round(q*(q>=500?1.2:1.4))}
 function calcShow(){const q=+$('cq').value;$('cpr').textContent=(q>=100&&q%100===0)?calcP(q)+' ج':'—'}
